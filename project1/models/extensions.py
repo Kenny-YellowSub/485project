@@ -6,4 +6,5 @@ IMAGE_PATH = 'images/'
 UPLOAD_FOLDER = 'static/' + IMAGE_PATH
 NO_COVER_IMAGE = 'no-cover-image.jpg'
 
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+

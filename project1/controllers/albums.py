@@ -29,7 +29,7 @@ def albums_edit_route():
     return render_template("albums.html", **options)
 
 
-@albums.route('/albums')
+@albums.route('/albums/')
 def albums_route():
     username = request.args.get('username')
     options = get_album_info(username, False)
