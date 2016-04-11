@@ -9,7 +9,7 @@ CREATE TABLE User(
 
 CREATE TABLE Photo(
     picid       VARCHAR(40),
-    path         VARCHAR(255) NOT NULL,
+    path        VARCHAR(255) NOT NULL,
     format      CHAR(3) NOT NULL,
     date        DATE,
     CONSTRAINT pk_picid PRIMARY KEY(picid)
