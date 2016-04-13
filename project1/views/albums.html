@@ -19,6 +19,7 @@
             {% endif %}
             <br/>
             <a href= '{{ url_for("album.album_route", albumid=album[0]) }}'>{{ album[1] }}</a>
+
             {% if edit %}
                 <a href= '{{ url_for("album.album_edit_route", albumid=album[0]) }}'>edit</a>
                 <form method="post">

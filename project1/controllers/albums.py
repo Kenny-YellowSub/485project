@@ -9,13 +9,13 @@ albums = Blueprint('albums', __name__, template_folder='views')
 def albums_edit_route():
 
     username = request.args.get('username')
-    options = get_album_info(username, True)
+    options = get_album_info(username)
+    options['edit'] = True
     if not options:
         return render_template("error.html", error_msg='user not found'), 404
 
     if request.method == 'POST':
         data = request.form
-        print data
 
         if 'op' in data:
             if data['op'] == 'add':
@@ -32,13 +32,23 @@ def albums_edit_route():
 @albums.route('/albums/')
 def albums_route():
     username = request.args.get('username')
-    options = get_album_info(username, False)
+    options = get_album_info(username)
+    options['edit'] = False
     if not options:
         return render_template("error.html", error_msg='user not found'), 404
     return render_template("albums.html", **options)
 
 
-def get_album_info(username, edit):
+def get_album_info(username):
+    """
+    Retrieve album info of the user identified by <username>
+    :param username: Identify the user
+    :return: a dictionary with following fields:
+        { 'user_info'   : a tuple consist of (first name, last name, username),
+          'album_list'  : a tuple of tuple (albumid, title, create-time, update-time, cover photo path)
+          'path'        : the prefix of the path of all photos
+          'no_cover'    : the path to default cover
+    """
     sql_check_user = "SELECT firstname, lastname FROM User WHERE username=%s"
     cur = mysql.connection.cursor()
     cur.execute(sql_check_user, (username,))
@@ -47,7 +57,6 @@ def get_album_info(username, edit):
         return None
 
     options = {
-        "edit": edit,
         "user_info": {'firstname': user_info[0], 'lastname': user_info[1], 'username': username},
         "album_list": Album.get_albums_by_username(username),
         "path": IMAGE_PATH,
