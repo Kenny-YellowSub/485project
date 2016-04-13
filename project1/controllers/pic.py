@@ -14,6 +14,7 @@ def pic_route():
     cur = mysql.connection.cursor()
     cur.execute(sql_get_path, (picid,))
     data = cur.fetchone()
+    cur.close()
     if data is None:
         return render_template('error.html', error_msg='No picture found'), 404
 
