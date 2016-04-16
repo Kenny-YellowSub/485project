@@ -4,7 +4,7 @@ import controllers
 from flask_images import Images
 from project1.models.extensions import mysql, UPLOAD_FOLDER, ALLOWED_EXTENSIONS
 
-app = Flask(__name__, template_folder='views')
+app = Flask(__name__)
 app.secret_key = 'monkey'
 images = Images(app)
 
