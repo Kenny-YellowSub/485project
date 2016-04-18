@@ -1,0 +1,32 @@
+Problem1:
+ImportError: dlopen(/Users/Xochitl_Shieh/Library/Python/2.7/lib/python/site-packages/_mysql.so, 2): Library not loaded: libmysqlclient.18.dylib
+  Referenced from: /Users/Xochitl_Shieh/Library/Python/2.7/lib/python/site-packages/_mysql.so
+  Reason: image not found
+
+
+Solution: reinstall mysql2
+
+gem uninstall mysql2
+gem install mysql2
+
+
+Problem2:
+
+ImportError: dlopen(/Users/Xochitl_Shieh/Library/Python/2.7/lib/python/site-packages/_mysql.so, 2): Library not loaded: libmysqlclient.18.dylib
+  Referenced from: /Users/Xochitl_Shieh/Library/Python/2.7/lib/python/site-packages/_mysql.so
+  Reason: unsafe use of relative rpath libmysqlclient.18.dylib in /Users/Xochitl_Shieh/Library/Python/2.7/lib/python/site-packages/_mysql.so with restricted binary
+
+
+/Users/Xochitl_Shieh/Library/Python/2.7/lib/python/site-packages/
+0587336928:site-packages Xochitl_Shieh$ ls
+MySQL_python-1.2.5-py2.7.egg-info       _mysql.so                               _mysql_exceptions.pyc
+MySQLdb                                 _mysql_exceptions.py                    mysql2csv-0.2-py2.7.egg-info
+0587336928:site-packages Xochitl_Shieh$ otool -L _mysql.so
+_mysql.so:
+        libmysqlclient.18.dylib (compatibility version 18.0.0, current version 18.0.0)
+        /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1226.10.1)
+0587336928:site-packages Xochitl_Shieh$ install_name_tool -change libmysqlclient.18.dylib /usr/local/mysql/lib/libmysqlclient.18.dylib _mysql.so
+0587336928:site-packages Xochitl_Shieh$ otool -L _mysql.so
+_mysql.so:
+        /usr/local/mysql/lib/libmysqlclient.18.dylib (compatibility version 18.0.0, current version 18.0.0)
+        /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1226.10.1)
