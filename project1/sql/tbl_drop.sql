@@ -1,4 +1,6 @@
 DROP TABLE Contain;
+DROP TABLE AlbumAccess;
 DROP TABLE Album;
-DROP TABLE Photo;
 DROP TABLE User;
+DROP TABLE Photo;
+
