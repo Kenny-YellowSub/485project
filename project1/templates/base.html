@@ -1,17 +1,47 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html lang="en">
+
+
 <head>
 
-    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/style.css"/>
 
     <title>Online Album</title>
 </head>
 <body>
 
-  <div class="center">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{url_for('main.main_route')}}">Album Site</a>
+        </div>
+        <ul class="nav navbar-nav">
+            {% if user_info is none %}
+            <li>
+                <a class="navbar_login" href="{{url_for('authentication.login_route')}}">Login</a>
+            </li>
+
+            {% else %}
+            <li>Welcome
+            <a class="navbar-userinfo" href='{{url_for("main.main_route")}}'>{{ session['username'] }}</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+
+</nav>
+
+
+<div class="center">
     {% block content %}{% endblock %}
-  </div>
-  <script type="text/javascript" src="/static/js/main.js"></script>
+</div>
+<script type="text/javascript" src="/static/js/main.js"></script>
+
+<footer>
+    <p>
+        Powered by fubUmich and Xochitlxie.
+    </p>
+</footer>
 </body>
 
 </html>

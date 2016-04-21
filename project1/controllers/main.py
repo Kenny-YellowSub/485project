@@ -1,19 +1,18 @@
-from flask import *
+from flask import session, render_template, Blueprint
 
 from project1.models.extensions import mysql
+from project1.models.User import Users
 
 main = Blueprint('main', __name__, template_folder='views')
 
 
 @main.route('/')
 def main_route():
+    options = {
+        'user_info': None
+    }
+    if 'username' in session:
+        options['user_info'] = Users.get_user_info(session['username'])
 
-        query = "SELECT firstname, lastname, username FROM User"
-        cur = mysql.connection.cursor()
-        cur.execute(query)
-        user_list = []
+    return render_template("index.html", **options)
 
-        for user in cur.fetchall():
-            user_list.append((user[0] + ' ' + user[1], url_for('albums.albums_route', username=user[2])))
-
-        return render_template("index.html", user=user_list)

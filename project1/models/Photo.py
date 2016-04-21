@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 from extensions import ALLOWED_EXTENSIONS, UPLOAD_FOLDER, mysql
 
+
 class Photo:
     def __init__(self):
         pass
